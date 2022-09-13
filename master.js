@@ -19,10 +19,12 @@ const map = ['', '', '', '', '', '', '', '', '']
 let clicks = 0
 let grid = document.querySelectorAll('.line')
 let bot = 0
+let walker = 0
 
 {
 
     function Start() {
+        walker = 0
         clicks = 0
         spots.forEach((element, index) => {
             element.style.opacity = 0
@@ -219,12 +221,19 @@ function botSwitch(element) {
 
 function BotMove() {
     JudgeNod = JudgeNod.join().split(',')
-    getLog(JudgeNod)
+    // getLog(JudgeNod)
     if (clicks % 2 == 1 && bot % 2 == 1) {
         for (i = (JudgeNod.length - 1); i > 0; i--) {
-            getLog(i)
             // spots[Number(JudgeNod[i]-1)].click()   Hell danger!!
             placeData(spots[Number(JudgeNod[i] - 1)], 'O')
         }
+        setTimeout(() => {
+            if(clicks%2==1 && clicks<9){
+                spots[botMoves[walker]-1].click()
+                if (walker<8){
+                    walker++
+                }
+            }
+        }, 100);
     }
 }
